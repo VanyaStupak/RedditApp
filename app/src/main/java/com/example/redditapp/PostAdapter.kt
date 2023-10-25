@@ -1,5 +1,6 @@
 package com.example.redditapp
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -47,6 +48,15 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         holder.bind(posts[position])
+
+        holder.itemView.setOnClickListener {
+            val context = holder.itemView.context
+            val intent = Intent(context, FullScreenImageActivity::class.java)
+
+            intent.putExtra("imgUrl", posts[position].data.thumbnail)
+
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {
