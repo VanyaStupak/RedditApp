@@ -16,9 +16,6 @@ class FullScreenImageActivity : AppCompatActivity() {
         binding = ActivityFullScreenImageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val toolbar = binding.fullscreenToolbar
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false);
         val imgUrl = intent.getStringExtra("imgUrl")
 
         Glide.with(this)
