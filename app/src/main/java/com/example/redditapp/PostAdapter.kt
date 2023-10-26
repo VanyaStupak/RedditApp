@@ -19,10 +19,15 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
     inner class PostViewHolder(private val binding: ItemPostBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(post: Children) {
-            binding.author.text = post.data.author
-            binding.title.text = post.data.title
+            val context = binding.image.context
+            val url = post.data.url
+            val author = post.data.author
+            val title = post.data.title
+            val selfText = post.data.selftext
+            binding.author.text = author
+            binding.title.text = title
             binding.comments.text = "${post.data.num_comments.toString()} Comments"
-            binding.selftext.text = post.data.selftext
+            binding.selftext.text = selfText
 
             val currentTimestamp = System.currentTimeMillis() / 1000
             val timeDifference = currentTimestamp - post.data.created
@@ -53,10 +58,10 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
                     .into(binding.image)
             }
 
-            val url = post.data.url
-            val context = binding.image.context
+
+
             binding.image.setOnClickListener {
-                if (!url.endsWith(".jpg")) {
+                if (!url.endsWith(".jpg") && !url.endsWith(".png")) {
                     val intent = Intent(Intent.ACTION_VIEW)
                     intent.data = Uri.parse(url)
                     try {

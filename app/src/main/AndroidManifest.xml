@@ -19,7 +19,7 @@
             android:name=".FullScreenImageActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".MainActivity" android:theme="@style/Base.Theme.RedditApp"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
