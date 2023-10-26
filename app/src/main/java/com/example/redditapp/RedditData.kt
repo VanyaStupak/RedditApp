@@ -26,6 +26,7 @@ data class DataX(
     val author: String,
     val selftext: String,
     val num_comments: Int,
+    val url: String,
     val created: Int,
     val thumbnail: String,
     val title: String,

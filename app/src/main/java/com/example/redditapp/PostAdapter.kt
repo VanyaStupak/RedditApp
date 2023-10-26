@@ -2,6 +2,7 @@ package com.example.redditapp
 
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -10,7 +11,9 @@ import com.example.redditapp.databinding.ItemPostBinding
 
 class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
     private var posts = mutableListOf<Children>()
-    inner class PostViewHolder(private val binding: ItemPostBinding) : RecyclerView.ViewHolder(binding.root) {
+
+    inner class PostViewHolder(private val binding: ItemPostBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(post: Children) {
             binding.author.text = post.data.author
             binding.title.text = post.data.title
@@ -26,18 +29,29 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
                     val timeAgo = timeDifference / 60
                     binding.date.text = "$timeAgo minutes ago"
                 }
+
                 timeDifference < 86400 -> {
                     val timeAgo = timeDifference / 3600
                     binding.date.text = "$timeAgo hours ago"
                 }
+
                 else -> {
                     val timeAgo = timeDifference / 86400
                     binding.date.text = "$timeAgo days ago"
                 }
             }
+
             Glide.with(binding.root)
                 .load(post.data.thumbnail)
                 .into(binding.image)
+
+            binding.image.setOnClickListener {
+                val context = binding.image.context
+                val intent = Intent(context, FullScreenImageActivity::class.java)
+                intent.putExtra("imgUrl", post.data.url)
+                intent.putExtra("imgTitle", post.data.title)
+                context.startActivity(intent)
+            }
         }
     }
 
@@ -48,15 +62,6 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         holder.bind(posts[position])
-
-        holder.itemView.setOnClickListener {
-            val context = holder.itemView.context
-            val intent = Intent(context, FullScreenImageActivity::class.java)
-
-            intent.putExtra("imgUrl", posts[position].data.thumbnail)
-
-            context.startActivity(intent)
-        }
     }
 
     override fun getItemCount(): Int {
@@ -64,7 +69,7 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
     }
 
     fun addPosts(newPosts: List<Children>) {
-         posts.addAll(newPosts)
+        posts.addAll(newPosts)
         notifyDataSetChanged()
     }
 }
