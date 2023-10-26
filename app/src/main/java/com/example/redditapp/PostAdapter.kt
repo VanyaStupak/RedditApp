@@ -1,9 +1,13 @@
 package com.example.redditapp
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.redditapp.databinding.ItemPostBinding
@@ -40,18 +44,35 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
                     binding.date.text = "$timeAgo days ago"
                 }
             }
-
-            Glide.with(binding.root)
-                .load(post.data.thumbnail)
-                .into(binding.image)
-
-            binding.image.setOnClickListener {
-                val context = binding.image.context
-                val intent = Intent(context, FullScreenImageActivity::class.java)
-                intent.putExtra("imgUrl", post.data.url)
-                intent.putExtra("imgTitle", post.data.title)
-                context.startActivity(intent)
+            if (!post.data.thumbnail.endsWith(".jpg")) {
+                binding.image.visibility = View.GONE
+            } else {
+                binding.image.visibility = View.VISIBLE
+                Glide.with(binding.root)
+                    .load(post.data.thumbnail)
+                    .into(binding.image)
             }
+
+            val url = post.data.url
+            val context = binding.image.context
+            binding.image.setOnClickListener {
+                if (!url.endsWith(".jpg")) {
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.data = Uri.parse(url)
+                    try {
+                        context.startActivity(intent)
+                    } catch (e: ActivityNotFoundException) {
+                        e.printStackTrace()
+                    }
+                } else {
+                    val intent = Intent(context, FullScreenImageActivity::class.java)
+                    intent.putExtra("imgUrl", post.data.url)
+                    intent.putExtra("imgTitle", post.data.title)
+                    context.startActivity(intent)
+                }
+            }
+
+
         }
     }
 
