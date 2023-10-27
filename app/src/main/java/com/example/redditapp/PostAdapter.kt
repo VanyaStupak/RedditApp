@@ -3,11 +3,9 @@ package com.example.redditapp
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.redditapp.databinding.ItemPostBinding
@@ -27,7 +25,7 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
             binding.author.text = author
             binding.title.text = title
             binding.comments.text = "${post.data.num_comments.toString()} Comments"
-            binding.selftext.text = selfText
+            binding.selftext?.text = selfText
 
             val currentTimestamp = System.currentTimeMillis() / 1000
             val timeDifference = currentTimestamp - post.data.created
@@ -86,6 +84,7 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
         return PostViewHolder(binding)
     }
 
+
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         holder.bind(posts[position])
     }
@@ -97,5 +96,12 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
     fun addPosts(newPosts: List<Children>) {
         posts.addAll(newPosts)
         notifyDataSetChanged()
+    }
+    fun setPosts(newPosts: List<Children>) {
+        posts = newPosts as MutableList<Children>
+        notifyDataSetChanged()
+    }
+    fun getPosts(): List<Children> {
+        return posts
     }
 }

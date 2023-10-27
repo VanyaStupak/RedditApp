@@ -11,7 +11,6 @@ data class Children(
     val kind: String
 )
 
-
 data class Data(
     val after: String,
     val before: Any,

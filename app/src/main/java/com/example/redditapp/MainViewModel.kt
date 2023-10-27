@@ -1,5 +1,6 @@
 package com.example.redditapp
 
+import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,10 +15,11 @@ class MainViewModel : ViewModel() {
     private var after: String? = null
     private var limit: Int = 10
     private var count: Int = 0
+    var postsList: List<Children>? = null
+
     fun loadPosts(redditApi: RedditApi) {
         viewModelScope.launch(Dispatchers.IO) {
             val info = redditApi.getTopFromReddit(after, limit, count)
-            Log.d("MyLog", info.toString())
             after = info.data.after
             count += limit
             _posts.postValue(info.data.children)

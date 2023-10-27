@@ -1,6 +1,5 @@
 package com.example.redditapp
 
-
 import android.content.ContentValues
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
@@ -36,9 +35,10 @@ class FullScreenImageActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         toolbar.navigationIcon = ContextCompat.getDrawable(this, R.drawable.baseline_arrow_back_24)
+
         val imgUrl = intent.getStringExtra("imgUrl")
 
-       Glide.with(this)
+        Glide.with(this)
             .asBitmap()
             .load(imgUrl)
             .into(binding.imageView)
@@ -56,10 +56,12 @@ class FullScreenImageActivity : AppCompatActivity() {
                 finish()
                 true
             }
+
             R.id.action_download -> {
                 downloadImage()
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -68,12 +70,12 @@ class FullScreenImageActivity : AppCompatActivity() {
         Glide.with(this)
             .asBitmap()
             .load(intent.getStringExtra("imgUrl"))
-            .into(object: CustomTarget<Bitmap>(){
+            .into(object : CustomTarget<Bitmap>() {
                 override fun onResourceReady(
                     resource: Bitmap,
                     transition: com.bumptech.glide.request.transition.Transition<in Bitmap>?
                 ) {
-                 saveMediaToStorage(resource)
+                    saveMediaToStorage(resource)
                 }
 
                 override fun onLoadCleared(placeholder: Drawable?) {
@@ -82,6 +84,7 @@ class FullScreenImageActivity : AppCompatActivity() {
 
             })
     }
+
     fun saveMediaToStorage(bitmap: Bitmap) {
         val name = intent.getStringExtra("imgTitle")
         val filename = "$name.jpg"

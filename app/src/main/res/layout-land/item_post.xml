@@ -2,16 +2,16 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#DCDCDC">
+    android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginStart="2dp"
         android:layout_marginTop="2dp"
         android:layout_marginEnd="2dp"
         android:layout_marginBottom="2dp"
+        app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +23,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp">
+            android:layout_margin="5dp"
+            android:background="#FFFFFF">
 
             <TextView
                 android:id="@+id/author"
@@ -36,29 +37,24 @@
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/author"
-                android:layout_marginTop="4dp"
+                android:layout_above="@+id/image"
+                android:layout_below="@+id/author"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="0dp"
                 android:textColor="#000000"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/selftext"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/title"
-                android:layout_marginTop="4dp"
-                android:textColor="#393939" />
+                android:textSize="15sp" />
 
             <ImageView
                 android:id="@+id/image"
                 android:layout_width="140dp"
                 android:layout_height="140dp"
-                android:layout_below="@id/selftext"
+                android:layout_above="@+id/linear"
                 android:layout_alignParentStart="true"
-
-                />
+                android:layout_marginBottom="2dp" />
 
             <LinearLayout
+                android:id="@+id/linear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
