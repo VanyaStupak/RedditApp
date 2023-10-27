@@ -22,7 +22,6 @@ data class Data(
 )
 
 data class DataX(
-
     val author: String,
     val selftext: String,
     val num_comments: Int,
@@ -30,35 +29,6 @@ data class DataX(
     val created: Int,
     val thumbnail: String,
     val title: String,
-
-    )
-
-data class GalleryData(
-    val items: List<Item>
 )
 
-data class Image(
-    val id: String,
-    val resolutions: List<Resolution>,
-    val source: Source,
-)
 
-data class Item(
-    val id: Int,
-    val media_id: String
-)
-
-data class Preview(
-    val enabled: Boolean,
-    val images: List<Image>
-)
-data class Resolution(
-    val height: Int,
-    val url: String,
-    val width: Int
-)
-data class Source(
-    val height: Int,
-    val url: String,
-    val width: Int
-)

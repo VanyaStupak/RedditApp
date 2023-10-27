@@ -4,7 +4,6 @@ package com.example.redditapp
 import android.content.ContentValues
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
-import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -43,8 +42,6 @@ class FullScreenImageActivity : AppCompatActivity() {
             .asBitmap()
             .load(imgUrl)
             .into(binding.imageView)
-
-
 
     }
 
