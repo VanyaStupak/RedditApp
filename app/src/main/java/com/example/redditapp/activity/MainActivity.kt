@@ -1,16 +1,15 @@
-package com.example.redditapp
+package com.example.redditapp.activity
 
 import android.content.res.Configuration
 import android.os.Bundle
-import android.view.ViewGroup
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.redditapp.viewmodel.MainViewModel
+import com.example.redditapp.adapter.PostAdapter
+import com.example.redditapp.data.RedditApi
 import com.example.redditapp.databinding.ActivityMainBinding
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

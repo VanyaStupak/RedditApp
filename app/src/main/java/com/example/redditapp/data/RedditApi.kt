@@ -1,4 +1,4 @@
-package com.example.redditapp
+package com.example.redditapp.data
 
 import retrofit2.http.GET
 import retrofit2.http.Query

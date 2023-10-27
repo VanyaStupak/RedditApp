@@ -1,4 +1,4 @@
-package com.example.redditapp
+package com.example.redditapp.activity
 
 import android.content.ContentValues
 import android.graphics.Bitmap
@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
+import com.example.redditapp.R
 import com.example.redditapp.databinding.ActivityFullScreenImageBinding
 import java.io.File
 import java.io.FileOutputStream

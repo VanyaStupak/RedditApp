@@ -1,11 +1,11 @@
-package com.example.redditapp
+package com.example.redditapp.viewmodel
 
-import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.redditapp.data.Children
+import com.example.redditapp.data.RedditApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

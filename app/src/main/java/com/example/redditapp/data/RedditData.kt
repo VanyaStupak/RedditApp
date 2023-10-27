@@ -1,4 +1,4 @@
-package com.example.redditapp
+package com.example.redditapp.data
 
 
 data class RedditData(
