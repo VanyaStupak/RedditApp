@@ -7,14 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.redditapp.application.App
 import com.example.redditapp.viewmodel.MainViewModel
 import com.example.redditapp.adapter.PostAdapter
-import com.example.redditapp.data.RedditApi
 import com.example.redditapp.databinding.ActivityMainBinding
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,28 +18,12 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels()
     private val postAdapter = PostAdapter()
     private var isLoading = false
-
-    private val redditApi by lazy {
-        val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
-
-        val client = OkHttpClient.Builder().addInterceptor(interceptor)
-            .build()
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://www.reddit.com")
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(client)
-            .build()
-        retrofit.create(RedditApi::class.java)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.notesToolbar)
+        setSupportActionBar(binding.toolbar)
 
         binding.rcView.adapter = postAdapter
 
@@ -52,10 +32,11 @@ class MainActivity : AppCompatActivity() {
         } else {
             binding.rcView.layoutManager = GridLayoutManager(this, 2)
         }
+
         if (viewModel.postsList != null) {
             postAdapter.addPosts(viewModel.postsList!!)
         }
-        viewModel.loadPosts(redditApi)
+        viewModel.loadPosts(App.getApi())
         viewModel.posts.observe(this, Observer { posts ->
             postAdapter.addPosts(posts)
             isLoading = false
@@ -71,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
                 if (!isLoading && (visibleItemCount + firstVisibleItemPosition) >= totalItemCount && firstVisibleItemPosition >= 0) {
                     isLoading = true
-                    viewModel.loadPosts(redditApi)
+                    viewModel.loadPosts(App.getApi())
                 }
             }
         })

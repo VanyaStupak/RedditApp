@@ -13,7 +13,7 @@ class MainViewModel : ViewModel() {
     private val _posts = MutableLiveData<List<Children>>()
     val posts: LiveData<List<Children>> get() = _posts
     private var after: String? = null
-    private var limit: Int = 10
+    private var limit: Int = 15
     private var count: Int = 0
     var postsList: List<Children>? = null
 
