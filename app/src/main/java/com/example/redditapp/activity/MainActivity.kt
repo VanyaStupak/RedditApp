@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         if (viewModel.postsList != null) {
             postAdapter.addPosts(viewModel.postsList!!)
         }
+
         viewModel.loadPosts(App.getApi())
         viewModel.posts.observe(this, Observer { posts ->
             postAdapter.addPosts(posts)

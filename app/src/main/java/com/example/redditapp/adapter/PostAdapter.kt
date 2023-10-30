@@ -49,6 +49,7 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
                     binding.date.text = "$timeAgo days ago"
                 }
             }
+
             if (!post.data.thumbnail.endsWith(".jpg")) {
                 binding.image.visibility = View.GONE
             } else {
@@ -57,8 +58,6 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
                     .load(post.data.thumbnail)
                     .into(binding.image)
             }
-
-
 
             binding.image.setOnClickListener {
                 if (!url.endsWith(".jpg") && !url.endsWith(".png")) {
@@ -71,8 +70,8 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
                     }
                 } else {
                     val intent = Intent(context, FullScreenImageActivity::class.java)
-                    intent.putExtra("imgUrl", post.data.url)
-                    intent.putExtra("imgTitle", post.data.title)
+                    intent.putExtra("imgUrl", url)
+                    intent.putExtra("imgTitle", title)
                     context.startActivity(intent)
                 }
             }
